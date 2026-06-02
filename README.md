@@ -88,6 +88,19 @@ Alternativ kann das Plugin auch als normales Python-Paket installiert werden:
 pip install pretix-bundestag-export
 ```
 
+Bei Nutzung einer eigenen pretix-Instanz in einem Docker-Setup, sieht die Installation per Dockerfile so aus:
+
+```Dockerfile
+FROM pretix/standalone:stable
+
+USER root
+RUN pip3 install pretix-bundestag-export && \
+    rm -rf ~/.cache/pip
+
+USER pretixuser
+RUN cd /pretix/src && make production
+```
+
 ### 2. pretix neu starten
 
 Nach der Installation muss pretix neu gestartet werden, damit die Plugin-Metadaten geladen und die Exporter-Signale registriert werden. pretix lädt Plugins als reguläre Django-App und aktiviert zusätzliche Funktionen über deren App-Konfiguration und Signal-Registrierung.
