@@ -82,7 +82,11 @@ Das Repository kann lokal installiert oder in ein bestehendes Plugin-Setup einge
 pip install -e .
 ```
 
-Alternativ kann das Plugin auch als normales Python-Paket installiert werden.
+Alternativ kann das Plugin auch als normales Python-Paket installiert werden:
+
+```bash
+pip install pretix-bundestag-export
+```
 
 ### 2. pretix neu starten
 
