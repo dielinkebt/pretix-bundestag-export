@@ -76,19 +76,25 @@ Die folgenden internen Referenzen müssen in pretix vorhanden sein, wenn die jew
 
 ### 1. Plugin in das pretix-System bringen
 
-Das Repository kann lokal installiert oder in ein bestehendes Plugin-Setup eingebunden werden. Typischerweise geschieht das per `pip`:
+Das Repository kann lokal installiert oder in ein bestehendes Plugin-Setup eingebunden werden. Typischerweise geschieht das per `pip`.
 
-```bash
-pip install -e .
-```
-
-Alternativ kann das Plugin auch als normales Python-Paket installiert werden:
+#### Installation
 
 ```bash
 pip install pretix-bundestag-export
 ```
 
-Bei Nutzung einer eigenen pretix-Instanz in einem Docker-Setup, sieht die Installation per Dockerfile so aus:
+#### Installation für Entwicklungsumgebung
+
+```bash
+git clone https://github.com/dielinkebt/pretix-bundestag-export.git
+cd pretix-bundestag-export
+pip install -e .
+```
+
+#### Installation in Docker-Umgebung
+
+Dazu einfach die Zeilen 3-5 im `Dockerfile` einfügen:
 
 ```Dockerfile
 FROM pretix/standalone:stable
