@@ -1,4 +1,4 @@
-# Pretix-Datenexport (Bundestag)
+# Pretix-Datenexportformat zur Anmeldung von Veranstaltungsteilnehmer*innen beim Bundestag
 
 Ein [pretix](https://github.com/pretix/pretix)-Plugin für den standardisierten Export von Teilnehmerdaten aus Veranstaltungen als CSV- oder Excel-Datei (`.xlsx`). Das Plugin ist für einen sehr konkreten Anwendungsfall gedacht: den Export einer Teilnehmendenliste in einem vom Bundestag vorgegebenen Format.
 

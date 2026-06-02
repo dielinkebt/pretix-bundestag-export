@@ -13,19 +13,14 @@ __all__ = ['PretixBundestagExportApp']
 
 
 class PretixBundestagExportApp(PluginConfig):
-    # Muss exakt dem Python-Paketnamen entsprechen.
     name = 'pretix_bundestag_export'
-    verbose_name = _('Datenexport (Bundestag)')
+    verbose_name = _('Teilnehmer*innenliste zur Anmeldung im Bundestag')
 
     class PretixPluginMeta:
-        name = _('Datenexport (Bundestag)')
+        name = _('Teilnehmer*innenliste (Bundestag)')
         author = 'Die Linke im Bundestag'
         version = '0.1.1'
-        # CUSTOMIZATION ist die Standard-Kategorie für Plugins ohne eigene Kategorie.
-        # Damit erscheint das Plugin im richtigen Abschnitt der Plugin-Liste.
         category = 'FORMAT'
-        # PLUGIN_LEVEL_ORGANIZER: Plugin wird auf Veranstalter-Ebene aktiviert
-        # und gilt dann automatisch für alle Veranstaltungen dieses Organizers.
         level = PLUGIN_LEVEL_ORGANIZER
         visible = True
         description = _(
