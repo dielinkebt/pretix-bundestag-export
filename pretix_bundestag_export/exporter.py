@@ -283,7 +283,7 @@ class BundestagDataExporter(BaseExporter):
 
         # Sinnvolle Spaltenbreiten für bessere Lesbarkeit
         ws.column_dimensions['A'].width = 25
-        ws.column_dimensions['B'].width = 30
+        ws.column_dimensions['B'].width = 35
         ws.column_dimensions['C'].width = 20
 
         bio = io.BytesIO()

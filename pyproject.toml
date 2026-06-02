@@ -1,0 +1,45 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pretix-bundestag-export"
+dynamic = ["version"]
+description = "pretix-Plugin für den Export von Teilnehmerdaten zur Anmeldung im Bundestag"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { file = "LICENSE" }
+authors = [
+  { name = "Die Linke im Bundestag", email = "digitalisierung@dielinkebt.de" }
+]
+keywords = ["pretix", "plugin", "export", "bundestag"]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Environment :: Web Environment",
+  "Framework :: Django",
+  "Intended Audience :: Developers",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python :: 3",
+]
+dependencies = [
+  "pretix>=2026.1.0",
+  "openpyxl>=3.1.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/dielinkebt/pretix-bundestag-export"
+Repository = "https://github.com/dielinkebt/pretix-bundestag-export"
+
+[project.entry-points."pretix.plugin"]
+pretix_bundestag_export = "pretix_bundestag_export:PretixPluginMeta"
+
+[tool.setuptools]
+include-package-data = true
+
+[tool.setuptools.dynamic]
+version = { attr = "pretix_bundestag_export.__version__" }
+
+[tool.setuptools.packages.find]
+include = ["pretix_bundestag_export*"]
+namespaces = false

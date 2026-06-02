@@ -19,11 +19,11 @@ class PretixBundestagExportApp(PluginConfig):
 
     class PretixPluginMeta:
         name = _('Datenexport (Bundestag)')
-        author = 'Jannis Hutt'
-        version = '0.1.0'
+        author = 'Die Linke im Bundestag'
+        version = '0.1.1'
         # CUSTOMIZATION ist die Standard-Kategorie für Plugins ohne eigene Kategorie.
         # Damit erscheint das Plugin im richtigen Abschnitt der Plugin-Liste.
-        category = 'CUSTOMIZATION'
+        category = 'FORMAT'
         # PLUGIN_LEVEL_ORGANIZER: Plugin wird auf Veranstalter-Ebene aktiviert
         # und gilt dann automatisch für alle Veranstaltungen dieses Organizers.
         level = PLUGIN_LEVEL_ORGANIZER
@@ -42,4 +42,4 @@ class PretixBundestagExportApp(PluginConfig):
         Registriert Signal-Receiver beim App-Start.
         Das importiert signals.py, wodurch der Exporter bei pretix bekannt gemacht wird.
         """
-        from . import signals  # noqa
+        from . import signals
