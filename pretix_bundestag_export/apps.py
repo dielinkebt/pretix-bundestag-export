@@ -14,18 +14,18 @@ __all__ = ['PretixBundestagExportApp']
 
 class PretixBundestagExportApp(PluginConfig):
     name = 'pretix_bundestag_export'
-    verbose_name = _('Teilnehmer*innenliste zur Anmeldung im Bundestag')
+    verbose_name = _('Exportiert eine Teilnehmendenliste zur Anmeldung von Gästen im Bundestag')
 
     class PretixPluginMeta:
-        name = _('Teilnehmer*innenliste (Bundestag)')
+        name = _('Teilnehmendenliste (Bundestag)')
         author = 'Die Linke im Bundestag'
         version = '0.1.1'
         category = 'FORMAT'
         level = PLUGIN_LEVEL_ORGANIZER
         visible = True
         description = _(
-            'Exportiert Teilnehmerdaten einer Veranstaltung als CSV oder Excel '
-            'mit Name, Vorname(n) und Geburtsdatum zur Anmeldung im Bundestag.'
+            'Exportiert Teilnehmendendaten einer Veranstaltung als CSV oder Excel '
+            'mit Name, Vorname(n) und Geburtsdatum zur Anmeldung von Gästen im Bundestag.'
         )
         compatibility = 'pretix>=2026.1.0'
         # Kein settings_links-Eintrag nötig, da der Exporter keinen
