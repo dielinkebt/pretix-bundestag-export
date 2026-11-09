@@ -83,9 +83,9 @@ class BundestagDataExporter(BaseExporter):
                 )
             ),
             (
-                'paid_only',
+                'access_only',
                 forms.BooleanField(
-                    label=_('Nur bezahlte Bestellungen exportieren'),
+                    label=_('Nur Teilnehmer:innen ohne Zutrittsberechtigung zum Bundestag exportieren'),
                     required=False,
                     initial=True,
                 )
@@ -177,7 +177,7 @@ class BundestagDataExporter(BaseExporter):
         # Unbekanntes Format: Originalwert zurückgeben, damit nichts verloren geht.
         return value_str
 
-    def _get_export_rows(self, paid_only=False):
+    def _get_export_rows(self, access_only=False):
         """
         Baut die eigentlichen Exportzeilen auf.
 
@@ -203,9 +203,9 @@ class BundestagDataExporter(BaseExporter):
             .order_by('order__code', 'positionid')
         )
 
-        # Optional nur bezahlte Bestellungen exportieren
-        if paid_only:
-            positions = positions.filter(order__status='p')
+        # Nur "bezahlte" Bestellungen exportieren – also keine abgesagten und 
+        # auch keine Teilnehmer:innen von der Warteliste
+        positions = positions.filter(order__status='p')
 
         rows = []
 
@@ -220,20 +220,29 @@ class BundestagDataExporter(BaseExporter):
             first_name = name_parts.get('given_name', '') or ''
             last_name = name_parts.get('family_name', '') or ''
 
+
+            # Sonderlogik: Wenn access_only == True, Zeilen mit 
+            # ZUTRITTSBERECHTIGUNG == Ja nicht exportieren.
+            has_zutrittsberechtigung = self._is_truthy_yes(answers.get('ZUTRITTSBERECHTIGUNG'))
+            
+            if access_only and has_zutrittsberechtigung:
+                continue
+
             # Sonderlogik: Wenn ANDERER_NAME == Ja, Ausweisdaten verwenden
             use_document_name = self._is_truthy_yes(answers.get('ANDERER_NAME'))
-
+            
             if use_document_name:
                 last_name = (answers.get('NACHNAME_AUSWEISDOKUMENT') or '').strip()
                 first_name = (answers.get('VORNAME_AUSWEISDOKUMENT') or '').strip()
 
-            birthdate = self._format_birthdate(answers.get('GEBURTSDATUM'))
+            birthdate = self._format_birthdate(answers.get('GEBURTSDATUM') or '')
 
             rows.append({
                 'Name': last_name,
                 'Vorname(n)': first_name,
                 'Geburtsdatum TT.MM.JJJJ': birthdate,
             })
+
 
         return rows
 
@@ -304,9 +313,9 @@ class BundestagDataExporter(BaseExporter):
         Pflichtmethode laut pretix-Dokumentation.
         """
         fmt = form_data.get('format', 'xlsx')
-        paid_only = bool(form_data.get('paid_only'))
+        access_only = bool(form_data.get('access_only'))
 
-        rows = self._get_export_rows(paid_only=paid_only)
+        rows = self._get_export_rows(access_only=access_only)
 
         # Event-Slug als Dateiname-Prefix für eindeutige Benennung
         event_slug = self.event.slug if self.event else 'export'

@@ -19,7 +19,7 @@ class PretixBundestagExportApp(PluginConfig):
     class PretixPluginMeta:
         name = _('Teilnehmendenliste (Bundestag)')
         author = 'Die Linke im Bundestag'
-        version = '0.1.2'
+        version = '0.1.3'
         category = 'FORMAT'
         level = PLUGIN_LEVEL_ORGANIZER
         visible = True
